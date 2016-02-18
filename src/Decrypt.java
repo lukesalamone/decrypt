@@ -36,7 +36,7 @@ public class Decrypt {
 			System.out.println(c + ": " + freq[i]);
 		}
 		
-		System.out.println("\n\n");
+		System.out.println("\n" + plaintext + "\n");
 		
 		while(true){
 			System.out.print("replace: ");
@@ -45,13 +45,15 @@ public class Decrypt {
 				break;
 			} else if(oldLetter.equals("reset")){
 				plaintext = ciphertext;
+				System.out.println("\n" + plaintext + "\n");
 				continue;
 			}
 			System.out.print("with: ");
 			String newLetter = scanner.nextLine();
 			oldLetter = oldLetter.toUpperCase();
 			newLetter = newLetter.toUpperCase();
-			System.out.println(replace(oldLetter.charAt(0), newLetter.charAt(0), plaintext));
+			plaintext = replace(oldLetter.charAt(0), newLetter.charAt(0), plaintext);
+			System.out.println(plaintext);
 			System.out.println();
 		}
 		
@@ -60,7 +62,7 @@ public class Decrypt {
 	private static int countCharacters(String text){
 		int count = 0;
 		for(int i=0; i<text.length(); i++){
-			if(text.charAt(i) != ' '){
+			if(Character.isLetter(text.charAt(i))){
 				count++;
 			}
 		}
@@ -73,7 +75,7 @@ public class Decrypt {
 		int[] count = new int[26];
 		
 		for(int i=0; i<text.length(); i++){
-			if(text.charAt(i) == ' '){
+			if(!Character.isLetter(text.charAt(i))){
 				continue;
 			}
 			char c = text.charAt(i);
